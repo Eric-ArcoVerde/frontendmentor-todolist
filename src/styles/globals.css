@@ -1,5 +1,21 @@
 @import "tailwindcss";
 
+@font-face {
+    font-family: Josefin Sans;
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap; /*carrega o arquivo com a font comum e quando chegar a que queremos ele muda*/
+    src: url("/fonts/josefins-regular.ttf") format("truetype"); /*Quando começa com / por padrão ele ta indo na pasta public*/
+}
+
+@font-face {
+    font-family: Josefin Sans;
+    font-style: bold;
+    font-weight: 700;
+    font-display: swap;
+    src: url("/fonts/josefins-bold.ttf") format("truetype");
+}
+
 @theme {
   /* Primary */
   --color-bright-blue-500: hsl(220, 98%, 61%);
@@ -33,4 +49,10 @@
   --color-dark-purple-700: hsl(233, 14%, 35%);
   --color-dark-purple-800: hsl(237, 14%, 26%);
   --color-dark-gray-600: hsl(236, 9%, 61%);
+
+  --font-primary: "Josefin Sans", sans-serif;
+}
+
+body{
+    font-family: var(--font-primary);
 }
