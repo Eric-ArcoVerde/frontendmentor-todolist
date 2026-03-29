@@ -6,10 +6,17 @@ const TodoHeader = () => {
 
   const { theme, toggleTheme } = useContext(ThemeContext) //é o hook do useContext, aqui desestrutura o objeto. theme representa o tema atual e toggleTheme a função que faz a troca do tema
 
-  return (
-    <header className='flex justify-between mb-6 pt-20'>
+  //dava erro de tipagem porque them não era tipado e recebia any
+  //theme = ??? any - 1234, bata, null
+  //themeConfig[theme] = pode dar erro, porque eu nem sei de theme existe no themeConfig
 
-      <h1 className='text-white text-[2.5rem] font-bold tracking-[1rem]'>TODO</h1>
+  //agora theme = 'light' || 'dark'
+  //themeConfig[theme] = sei que light ou dark existe no themeConfig
+
+  return (
+    <header className='flex justify-between p-5 items-center mb-6'>
+
+      <h1 className='text-white text-4xl sm:text-[2.5rem] font-bold tracking-[1rem]'>TODO</h1>
 
       <button className='cursor-pointer' onClick={toggleTheme}>
         <img className='w-8 h-8' src={`${themeConfig[theme].icon}`} alt="Alternar tema" />

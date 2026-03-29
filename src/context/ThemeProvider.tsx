@@ -1,12 +1,9 @@
 import { createContext, useState } from 'react'
-
-export const ThemeContext = createContext({})
+import { ThemeContext, type ThemeName } from './ThemeContext'
 
 interface ThemeProviderProps {
     children: React.ReactNode //Serve para tipar qualquer coisa que o React pode rederizar, muito mais seguro usar que o any. Usa interface para Pros de componentes
 }
-
-type ThemeName = 'light' | 'dark';
 
 export const ThemeProvider = ({children} : ThemeProviderProps) => {
 
