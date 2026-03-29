@@ -19,15 +19,15 @@
 @theme {
   /* Primary */
   --color-bright-blue-500: hsl(220, 98%, 61%);
-  --color-light-blue-start: hsl(192, 100%, 67%)
-  --color-light-blue-end: hsl(280, 87%, 65%)
+  --color-light-blue-start: hsl(192, 100%, 67%);
+  --color-light-blue-end: hsl(280, 87%, 65%);
 
 
   /* Gradient */
-  --gradient-check: linear-gradient(
+  /* --gradient-check: linear-gradient(
     hsl(192, 100%, 67%),
     hsl(280, 87%, 65%)
-  );
+  ); */
 
   /* ===================== */
   /* 🌞 Light Theme */
@@ -55,4 +55,15 @@
 
 body{
     font-family: var(--font-primary);
+}
+
+/* Cria classes personalizadas, elas são adicionadas ao estilo base do Tailwind, chama como o tailwind normal */
+@layer base { 
+  .theme-light{
+    @apply bg-[url('/images/bg-desktop-light.jpg')] bg-cover bg-no-repeat bg-center h-80;
+  }
+
+  .theme-dark{
+    @apply bg-[url('/images/bg-desktop-dark.jpg')] bg-cover bg-no-repeat bg-center h-80;
+  }
 }

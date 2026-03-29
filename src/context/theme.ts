@@ -5,27 +5,29 @@ export const themeConfig = {
     light: {
         name: "light",
         layout: {
+            heroClass: 'theme-light',
             backgroundColor: 'bg-light-purple-300',
-            textColor: 'text-light-navy-850'
+            textColor: 'text-light-gray-600'
         },
         todo: {
             backgroundColor: 'bg-light-bg',
             borderColor: 'border-light-purple-300',
-            textColor: 'text-light-navy-850'
+            textColor: 'text-light-navy-850',
         },
-        icon: IconSun
+        icon: MoonIcon
     },
     dark: {
         name: "dark",
         layout: {
+            heroClass: 'theme-dark',
             backgroundColor: 'bg-dark-navy-950',
-            textColor: 'text-dark-purple-300'
+            textColor: 'text-dark-purple-800',
         },
         todo: {
             backgroundColor: 'bg-dark-navy-900',
             borderColor: 'border-dark-purple-800',
-            textColor: 'text-dark-purple-300'
+            textColor: 'text-dark-purple-300',
         },
-        icon: MoonIcon
+        icon: IconSun
     }
 }
