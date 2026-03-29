@@ -7,10 +7,12 @@ import IconCheck from "/images/icon-check.svg"
 
 interface TodoListProps {
   todoList: Todo[];
-  toggleTodoCompleted: (id: number) => void
+  toggleTodoCompleted: (id: number) => void;
+  setFilter: (filter: "all" | "active" | "completed") => void;
+  filter: 'all' | 'active' | 'completed';
 }
 
-const TodoList = ({ todoList, toggleTodoCompleted }: TodoListProps) => {
+const TodoList = ({ todoList, toggleTodoCompleted, setFilter, filter }: TodoListProps) => {
   const { theme } = useContext(ThemeContext)
 
   return (
@@ -45,28 +47,43 @@ const TodoList = ({ todoList, toggleTodoCompleted }: TodoListProps) => {
             </li>
           ))}
         </ul>
-        {todoList.length > 0 && (
-          <div className={`text-sm flex justify-between p-4 ${themeConfig[theme].layout.textColor}`}>
-            <p>{todoList.length} items total</p>
 
-            <div className="hidden sm:flex gap-4">
-              <button className="cursor pointer text-bright-blue-500">All</button>
-              <button className={`cursor-pointer ${theme === "dark" ? "hover:text-dark-purple-100" : "hover:text-light-navy-850"} `}>Active</button>
-              <button className={`cursor-pointer ${theme === "dark" ? "hover:text-dark-purple-100" : "hover:text-light-navy-850"} `}>Completed</button>
-            </div>
+        <div className={`text-sm flex justify-between p-4 ${themeConfig[theme].layout.textColor}`}>
+          <p>{todoList.length} items total</p>
 
-            <button className={`cursor-pointer ${theme === "dark" ? "hover:text-dark-purple-100" : "hover:text-light-navy-850"} `}>Clear Completed</button>
+          <div className="hidden sm:flex gap-4">
+            <button
+              onClick={() => setFilter("all")}
+              className={`${filter === "all" ? "text-bright-blue-500" : ""} cursor pointer ${theme === "dark"
+                ? "hover:text-dark-purple-100"
+                : "hover:text-light-navy-850"}`}
+            >
+              All
+            </button>
+            <button
+              onClick={() => setFilter("active")}
+              className={`${filter === "active" ? "text-bright-blue-500" : ""} cursor-pointer ${theme === "dark"
+                ? "hover:text-dark-purple-100"
+                : "hover:text-light-navy-850"} `}
+            >
+              Active
+            </button>
+            <button onClick={() => setFilter("completed")} className={`cursor-pointer ${theme === "dark" ? "hover:text-dark-purple-100" : "hover:text-light-navy-850"} `}>Completed</button>
           </div>
-        )}
+
+          <button className={`${filter === "completed" ? "text-bright-blue-500" : ""} cursor-pointer ${theme === "dark" ? "hover:text-dark-purple-100" : "hover:text-light-navy-850"} `}>Clear Completed</button>
+        </div>
       </div>
 
-      {todoList.length > 0 && (
-        <div className={`${themeConfig[theme].todo.backgroundColor} ${themeConfig[theme].layout.textColor} flex justify-center gap-5 py-4 rounded-md mt-4 sm:hidden`}>
-          <button className="cursor pointer text-bright-blue-500">All</button>
-          <button className={`cursor-pointer ${theme === "dark" ? "hover:text-dark-purple-100" : "hover:text-light-navy-850"} `}>Active</button>
-          <button className={`cursor-pointer ${theme === "dark" ? "hover:text-dark-purple-100" : "hover:text-light-navy-850"} `}>Completed</button>
-        </div>
-      )}
+      <div className={`${themeConfig[theme].todo.backgroundColor} ${themeConfig[theme].layout.textColor} flex justify-center gap-5 py-4 rounded-md mt-4 sm:hidden`}>
+        <button onClick={() => setFilter("all")}
+          className={`${filter === "all" ? "text-bright-blue-500" : ""} cursor pointer ${theme === "dark"
+            ? "hover:text-dark-purple-100"
+            : "hover:text-light-navy-850"}`}
+        >All</button>
+        <button onClick={() => setFilter("active")} className={`${filter === "active" ? "text-bright-blue-500" : ""} cursor-pointer ${theme === "dark" ? "hover:text-dark-purple-100" : "hover:text-light-navy-850"} `}>Active</button>
+        <button onClick={() => setFilter("completed")} className={`${filter === "completed" ? "text-bright-blue-500" : ""} cursor-pointer ${theme === "dark" ? "hover:text-dark-purple-100" : "hover:text-light-navy-850"} `}>Completed</button>
+      </div>
     </>
   )
 }
