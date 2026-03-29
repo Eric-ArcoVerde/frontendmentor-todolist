@@ -31,7 +31,6 @@ export const useTodo = () => { //precisa de começar com "use" pro react entende
     }
 
     const toggleTodoCompleted = (id: number) => {
-        console.log(id)
         const newTodoList = todoList.map(todo => {
             if (id === todo.id) {
                 const completed = !todo.completed
@@ -44,10 +43,9 @@ export const useTodo = () => { //precisa de começar com "use" pro react entende
 
         })
         setTodoList(newTodoList)
-
     }
 
-    //faz o filtroo
+    //faz o filtro
     const filteredTodos = todoList.filter(todo => {
         if (filter === "active") return !todo.completed
         if (filter === "completed") return todo.completed
@@ -58,6 +56,11 @@ export const useTodo = () => { //precisa de começar com "use" pro react entende
         setTodoList(prev => prev.filter(todo => !todo.completed))
     }
 
+    
+    const removeItem = (id: number) => {
+        setTodoList(prev => prev.filter(todo => todo.id !== id))
+    }
+
     return {
         addTodo,
         toggleTodoCompleted, //amarelo é função
@@ -65,5 +68,6 @@ export const useTodo = () => { //precisa de começar com "use" pro react entende
         clearCompleted,
         filter,
         setFilter,
+        removeItem,
     }
 }

@@ -3,6 +3,7 @@ import { ThemeContext } from "../../context/ThemeContext"
 import { themeConfig } from "../../context/theme"
 import type { Todo } from "../../hooks/useTodo"
 import IconCheck from "/images/icon-check.svg"
+import IconCross from "/images/icon-cross.svg"
 
 
 interface TodoListProps {
@@ -11,14 +12,16 @@ interface TodoListProps {
   setFilter: (filter: "all" | "active" | "completed") => void;
   filter: 'all' | 'active' | 'completed';
   clearCompleted: () => void;
+  removeItem: (id: number) => void;
 }
 
-const TodoList = ({ 
-  todoList, 
-  toggleTodoCompleted, 
-  setFilter, 
-  filter, 
-  clearCompleted 
+const TodoList = ({
+  todoList,
+  toggleTodoCompleted,
+  setFilter,
+  filter,
+  clearCompleted,
+  removeItem,
 }: TodoListProps) => {
   const { theme } = useContext(ThemeContext)
 
@@ -28,7 +31,7 @@ const TodoList = ({
         <ul>
           {todoList.map((todo) => (
             <li
-              className={`p-6 border-b ${themeConfig[theme].todo.borderColor}`}
+              className={`group p-6 border-b ${themeConfig[theme].todo.borderColor}`}
               key={todo.id}
             >
               <div className="flex items-center gap-4">
@@ -42,14 +45,23 @@ const TodoList = ({
                       <img
                         src={IconCheck}
                         alt="Icone de marcado"
-                        className="h-2 w-2 m-auto" />
+                        className="h-2 w-2 m-auto hover:cursor-pointer" />
                     )}
                   </button>
                 </span>
 
-                <p className={`${themeConfig[theme].todo.textColor} ${todo.completed ? "line-through opacity-50" : ""}`}>
-                  {todo.text}
-                </p>
+                <div className="flex items-center justify-between w-full">
+                  <p className={`${themeConfig[theme].todo.textColor} ${todo.completed ? "line-through opacity-50" : ""}`}>
+                    {todo.text}
+                  </p>
+
+                  <button 
+                    onClick={() => removeItem(todo.id)} 
+                    className="cursor-pointer opacity-100 sm:opacity-0 sm:group-hover:opacity-100"
+                  >
+                    <img src={IconCross} alt="Icone Excluir" className="h-4 w-4" />
+                  </button>
+                </div>
               </div>
             </li>
           ))}
