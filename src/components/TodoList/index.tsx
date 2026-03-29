@@ -10,9 +10,16 @@ interface TodoListProps {
   toggleTodoCompleted: (id: number) => void;
   setFilter: (filter: "all" | "active" | "completed") => void;
   filter: 'all' | 'active' | 'completed';
+  clearCompleted: () => void;
 }
 
-const TodoList = ({ todoList, toggleTodoCompleted, setFilter, filter }: TodoListProps) => {
+const TodoList = ({ 
+  todoList, 
+  toggleTodoCompleted, 
+  setFilter, 
+  filter, 
+  clearCompleted 
+}: TodoListProps) => {
   const { theme } = useContext(ThemeContext)
 
   return (
@@ -71,7 +78,7 @@ const TodoList = ({ todoList, toggleTodoCompleted, setFilter, filter }: TodoList
             <button onClick={() => setFilter("completed")} className={`cursor-pointer ${theme === "dark" ? "hover:text-dark-purple-100" : "hover:text-light-navy-850"} `}>Completed</button>
           </div>
 
-          <button className={`${filter === "completed" ? "text-bright-blue-500" : ""} cursor-pointer ${theme === "dark" ? "hover:text-dark-purple-100" : "hover:text-light-navy-850"} `}>Clear Completed</button>
+          <button onClick={clearCompleted} className={`${filter === "completed" ? "text-bright-blue-500" : ""} cursor-pointer ${theme === "dark" ? "hover:text-dark-purple-100" : "hover:text-light-navy-850"} `}>Clear Completed</button>
         </div>
       </div>
 
